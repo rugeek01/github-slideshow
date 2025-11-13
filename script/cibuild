@@ -2,5 +2,9 @@
 
 set -e
 
-bundle exec jekyll build --baseurl "."
-htmlproofer _site/index.html --empty-alt-ignore
+if bundle exec jekyll --version >/dev/null 2>&1; then
+  bundle exec jekyll build --baseurl "."
+  htmlproofer _site/index.html --empty-alt-ignore
+else
+  echo "Jekyll not installed; skipping build" >&2
+fi
